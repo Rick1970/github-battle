@@ -5,9 +5,16 @@ import { Task } from './task.model';
     selector: 'task-display',
     inputs: ['task'],
   template: `
-    <h3>{{ task.description }}</h3>
+  <div>
+    <input *ngIf="task.done === true" type="checkbox" checked (click)="toggleDone(false)"/>
+    <input *ngIf="task.done === false" type="checkbox" (click)="toggleDone(true)"/>
+    <label>{{ task.description }}</label>
+  </div>
   `
 })
 export class TaskComponent {
   public task: Task;
+  toggleDone(setCompleteness: boolean){
+    this.task.done = setCompleteness;
+  }
 }
